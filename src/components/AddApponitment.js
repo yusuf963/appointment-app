@@ -7,27 +7,31 @@ class AddAppointments extends Component {
     this.state = {
       petName: "",
       ownerName: "",
-      aptNotes: "",
       aptDate: "",
+      aptTime: "",
+      aptNotes: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleAdd(e) {
-    e.preventDefult();
-    let temApt = {
-      pentName: this.state.petName,
+    e.preventDefault();
+    let tempApt = {
+      petName: this.state.petName,
       ownerName: this.state.ownerName,
-      aptDate: this.state.aptDate + "" + this.state.aptTime,
+      aptDate: this.state.aptDate + " " + this.state.aptTime,
       aptNotes: this.state.aptNotes,
     };
-    this.props.AddAppointments(temApt);
+
+    this.props.addAppointment(tempApt);
+
     this.setState({
       petName: "",
       ownerName: "",
-      aptNotes: "",
       aptDate: "",
+      aptTime: "",
+      aptNotes: "",
     });
     this.props.toggleForm();
   }
@@ -36,10 +40,12 @@ class AddAppointments extends Component {
     const target = e.target;
     const value = target.value;
     const name = target.name;
+
     this.setState({
       [name]: value,
     });
   }
+
   render() {
     return (
       <div
